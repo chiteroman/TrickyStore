@@ -8,3 +8,4 @@ me.garfieldhan.holmes
 com.CIB.Digital.MB
 com.whatsapp
 com.bet365.authenticator
+fr.gouv.franceidentite
