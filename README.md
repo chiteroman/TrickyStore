@@ -62,6 +62,18 @@ To see if your ROM is compatible, look in the `android_frameworks_base` repo of 
 
 To fix this issue, search for `engineGetCertificateChain` in that repo and see if there's some block of code that throws an exception if some condition that checks if it's related to key attestation (e.g. `PixelPropsUtils.getIsKeyAttest()` or `isCallerSafetyNet()`) is filled. You can delete this block of code and build your ROM yourself, or submit a commit to the maintainer of your ROM to add, for example, a system property to enable/disable this blocking. See [this commit](https://github.com/PixelBuildsROM/android_frameworks_base/commit/378ae3b7034d441fd0455639dc1a4b29b2876798) for reference.
 
+In some custom ROMs you can disable the spoof, just set to false "persist.sys.pixelprops.pi" prop:
+
+```
+setprop persist.sys.pixelprops.pi false
+```
+
+If it doesn't work:
+
+```
+resetprop persist.sys.pixelprops.pi false
+```
+
 ## TODO
 
 - Support App Attest Key.
