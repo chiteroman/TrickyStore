@@ -104,3 +104,8 @@ if [ ! -f "$CONFIG_DIR/target.txt" ]; then
   extract "$ZIPFILE" 'target.txt' "$TMPDIR"
   mv "$TMPDIR/target.txt" "$CONFIG_DIR/target.txt"
 fi
+if [ ! -f "$CONFIG_DIR/pif.json" ]; then
+  ui_print "- Adding pif json"
+  extract "$ZIPFILE" 'pif.json' "$TMPDIR"
+  mv "$TMPDIR/pif.json" "$CONFIG_DIR/pif.json"
+fi
