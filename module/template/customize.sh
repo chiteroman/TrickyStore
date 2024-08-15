@@ -109,3 +109,8 @@ if [ ! -f "$CONFIG_DIR/pif.json" ]; then
   extract "$ZIPFILE" 'pif.json' "$TMPDIR"
   mv "$TMPDIR/pif.json" "$CONFIG_DIR/pif.json"
 fi
+
+if [ -d "/data/adb/modules/playintegrityfix" ]; then
+  ui_print "- PIF module detected, its zygisk folder will be removed"
+  rm -rf "/data/adb/modules/playintegrityfix/zygisk"
+fi
