@@ -93,7 +93,6 @@ CONFIG_DIR=/data/adb/tricky_store
 if [ ! -d "$CONFIG_DIR" ]; then
   ui_print "- Creating configuration directory"
   mkdir -p "$CONFIG_DIR"
-  touch "$CONFIG_DIR/spoof_build_vars"
 fi
 if [ ! -f "$CONFIG_DIR/keybox.xml" ]; then
   ui_print "- Adding default software keybox"
