@@ -1,3 +1,6 @@
 [submodule "module/src/main/cpp/external/LSPlt"]
 	path = module/src/main/cpp/external/LSPlt
 	url = https://github.com/LSPosed/LSPlt
+[submodule "module/src/main/cpp/external/cJSON"]
+	path = module/src/main/cpp/external/cJSON
+	url = https://github.com/DaveGamble/cJSON.git
