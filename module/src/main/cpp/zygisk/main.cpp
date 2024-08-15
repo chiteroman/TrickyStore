@@ -12,6 +12,7 @@
 
 #include "logging.hpp"
 #include "zygisk.hpp"
+#include "cJSON.h"
 
 using zygisk::Api;
 using zygisk::AppSpecializeArgs;
