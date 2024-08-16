@@ -110,11 +110,16 @@ if [ ! -f "$CONFIG_DIR/target.txt" ]; then
   extract "$ZIPFILE" 'target.txt' "$TMPDIR"
   mv "$TMPDIR/target.txt" "$CONFIG_DIR/target.txt"
 fi
-if [ ! -f "$CONFIG_DIR/pif.json" ]; then
-  ui_print "- Adding pif json"
-  extract "$ZIPFILE" 'pif.json' "$TMPDIR"
-  mv "$TMPDIR/pif.json" "$CONFIG_DIR/pif.json"
+
+# Check custom fingerprint
+if [ -f "/data/adb/pif.json" ]; then
+  mv -f "/data/adb/pif.json" "/data/adb/pif.json.old"
+  ui_print "- Backup custom pif.json"
 fi
+
+ui_print "- Adding pif json"
+extract "$ZIPFILE" 'pif.json' "$TMPDIR"
+mv -f "$TMPDIR/pif.json" "$CONFIG_DIR/pif.json"
 
 if [ -d "/data/adb/modules/playintegrityfix" ]; then
   ui_print "- PIF module will be removed on next reboot"
