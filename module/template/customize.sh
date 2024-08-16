@@ -111,6 +111,6 @@ if [ ! -f "$CONFIG_DIR/pif.json" ]; then
 fi
 
 if [ -d "/data/adb/modules/playintegrityfix" ]; then
-  ui_print "- PIF module detected, its zygisk folder will be removed"
-  rm -rf "/data/adb/modules/playintegrityfix/zygisk"
+  ui_print "- PIF module will be removed on next reboot"
+  touch "/data/adb/modules/playintegrityfix/remove"
 fi
