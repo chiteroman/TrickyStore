@@ -13,12 +13,12 @@ object Config {
     private var isTeeBrokenMode = false
 
     private fun updateTargetPackages(f: File?) = runCatching {
+        hackPackages.clear()
+        generatePackages.clear()
         if (isGlobalMode) {
             Logger.i("Global mode is enabled, skipping updateTargetPackages execution.")
             return@runCatching
         }
-        hackPackages.clear()
-        generatePackages.clear()
         f?.readLines()?.forEach {
             if (it.isNotBlank() && !it.startsWith("#")) {
                 val n = it.trim()
@@ -112,13 +112,24 @@ object Config {
     }
 
     private fun checkPackages(packages: Set<String>, callingUid: Int) = kotlin.runCatching {
-        if (isGlobalMode) return true
         if (packages.isEmpty()) return false
         val ps = getPm()?.getPackagesForUid(callingUid)
         ps?.any { it in packages }
     }.onFailure { Logger.e("failed to get packages", it) }.getOrNull() ?: false
 
-    fun needHack(callingUid: Int): Boolean = checkPackages(hackPackages, callingUid)
-
-    fun needGenerate(callingUid: Int): Boolean = checkPackages(generatePackages, callingUid)
+    fun needHack(callingUid: Int): Boolean {
+        return when {
+            isTeeBrokenMode -> false
+            isGlobalMode -> true
+            else -> checkPackages(hackPackages, callingUid)
+        }
+    }
+    
+    fun needGenerate(callingUid: Int): Boolean {
+        return when {
+            isTeeBrokenMode && isGlobalMode -> true
+            isGlobalMode -> false
+            else -> checkPackages(generatePackages, callingUid)
+        }
+    }
 }
